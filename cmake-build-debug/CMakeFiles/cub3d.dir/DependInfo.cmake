@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/jjacquel/School/cub3d/get_next_line.c" "/Users/jjacquel/School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/get_next_line.c.o"
+  "/Users/jjacquel/School/cub3d/get_next_line_utils.c" "/Users/jjacquel/School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/get_next_line_utils.c.o"
   "/Users/jjacquel/School/cub3d/main.c" "/Users/jjacquel/School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

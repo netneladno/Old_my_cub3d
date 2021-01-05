@@ -78,6 +78,15 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/jjacquel/School/cub3d/cub3d.h">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/jjacquel/School/cub3d/get_next_line.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/jjacquel/School/cub3d/get_next_line_utils.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/jjacquel/School/cub3d/main.c">
 			<Option target="cub3d"/>
 		</Unit>

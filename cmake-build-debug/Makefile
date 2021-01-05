@@ -143,6 +143,60 @@ cub3d/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/build
 .PHONY : cub3d/fast
 
+get_next_line.o: get_next_line.c.o
+
+.PHONY : get_next_line.o
+
+# target to build an object file
+get_next_line.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line.c.o
+.PHONY : get_next_line.c.o
+
+get_next_line.i: get_next_line.c.i
+
+.PHONY : get_next_line.i
+
+# target to preprocess a source file
+get_next_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line.c.i
+.PHONY : get_next_line.c.i
+
+get_next_line.s: get_next_line.c.s
+
+.PHONY : get_next_line.s
+
+# target to generate assembly for a file
+get_next_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line.c.s
+.PHONY : get_next_line.c.s
+
+get_next_line_utils.o: get_next_line_utils.c.o
+
+.PHONY : get_next_line_utils.o
+
+# target to build an object file
+get_next_line_utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line_utils.c.o
+.PHONY : get_next_line_utils.c.o
+
+get_next_line_utils.i: get_next_line_utils.c.i
+
+.PHONY : get_next_line_utils.i
+
+# target to preprocess a source file
+get_next_line_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line_utils.c.i
+.PHONY : get_next_line_utils.c.i
+
+get_next_line_utils.s: get_next_line_utils.c.s
+
+.PHONY : get_next_line_utils.s
+
+# target to generate assembly for a file
+get_next_line_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_next_line_utils.c.s
+.PHONY : get_next_line_utils.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -179,6 +233,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cub3d"
+	@echo "... get_next_line.o"
+	@echo "... get_next_line.i"
+	@echo "... get_next_line.s"
+	@echo "... get_next_line_utils.o"
+	@echo "... get_next_line_utils.i"
+	@echo "... get_next_line_utils.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
