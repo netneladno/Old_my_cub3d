@@ -12,9 +12,16 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcpy(char *dest, char *src);
-int		print();
 
 
+
+typedef struct s_mlx
+{
+	void *mlx;
+	void *win;
+	int x;
+	int y;
+}	strct;
 
 
 # endif //CUB3D_CUB3D_H
