@@ -21,6 +21,7 @@ typedef struct s_mlx
 	void *win;
 	int x;
 	int y;
+	char	map[1024][1024]
 }	strct;
 
 

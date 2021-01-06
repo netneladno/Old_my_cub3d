@@ -290,7 +290,7 @@ public class MlxWin
   public func addHook(index idx:Int, fct fptr:UnsafeMutableRawPointer, param pptr:UnsafeMutableRawPointer)
   {  winE.addHook(index: idx, fct: fptr, param: pptr)  }
   public func setKeyRepeat(_ mode:Int)  { winE.setKeyRepeat(mode) }
-  public func destroyWinE()  { winE.close_win() }
+  public func destroyWinE()  { winE.key_handler() }
   public func setNotifs() { winE.setNotifs() }
   public func delNotifs() { winE.delNotifs() }
 
