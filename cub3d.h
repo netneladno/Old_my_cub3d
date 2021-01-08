@@ -5,8 +5,13 @@
 #  define BUFFER_SIZE 42
 #include <unistd.h>
 #include <stdlib.h>
-#define SCALE 30
+#define SCALE 20
 #define SPEED 7
+#define BORDER 0
+#define RESOLUT_X 1000
+#define RESOLUT_Y 1000
+
+
 
 typedef struct s_mlx
 {

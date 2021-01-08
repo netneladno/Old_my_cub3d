@@ -15,8 +15,9 @@ int		main(int argc, char **argv)
 	int i = 0;
 	int j;
 
-	prm.x = 20;
-	prm.y = 20;
+	prm.x = BORDER;
+	prm.y = BORDER;
+
 
 	fd = open(argv[1], O_RDONLY);
 	while (ret)
@@ -28,20 +29,21 @@ int		main(int argc, char **argv)
 			prm.map[i][j] = line[j];
 			if (prm.map[i][j] == 'N')
 			{
-				prm.plrpos_y = i * SCALE;
-				prm.plrpos_x = j * SCALE;
+//				printf("%d %d", i, j);
+				prm.plrpos_y = BORDER + i * SCALE;
+				prm.plrpos_x = BORDER + j * SCALE;
 				prm.map[i][j] = '0';
 			}
 
 		}
-		printf("%s\n", prm.map[i]);
+//		printf("%s\n", prm.map[i]);
 		i++;
 	}
 
 	prm.mlx = mlx_init();
-	prm.win = mlx_new_window(prm.mlx, 1100, 1000, "my_mlx");
+	prm.win = mlx_new_window(prm.mlx, RESOLUT_X, RESOLUT_Y, "my_mlx");
 	print_map(prm);
-	prnt_plr(prm, 0x435345);
+	prnt_plr(prm, 0xDC143C);
 
 	mlx_hook(prm.win, 2, 0, key_handler, &prm);
 	mlx_loop(prm.mlx);
@@ -51,8 +53,8 @@ void print_map(strct prm)
 {
 	int i = 0;
 	int j = 0;
-	prm.x = 20;
-	prm.y = 20;
+	prm.x = BORDER;
+	prm.y = BORDER;
 	while (prm.map[i][j])
 	{
 		while(prm.map[i][j])
@@ -60,27 +62,25 @@ void print_map(strct prm)
 			if (prm.map[i][j] == '1')
 			{
 				print_square(prm, 0xffffff);
-
-//				printf("prm.x = %d\n", prm.x);
 				prm.x = prm.x + SCALE;
 
 			}
 			else
 			{
-				print_square(prm, 0x808080);
+				print_square(prm, 0x222222);
 				prm.x = prm.x + SCALE;
 
 			}
-
+//			prm.x = prm.x + 2;
 			j++;
 		}
 		j = 0;
-		prm.x = 20;
+		prm.x = BORDER;
 		prm.y = prm.y + SCALE;
-		prm.y++;
-		printf("prm.y = %d\n", prm.y);
+//		prm.y = prm.y + 2;
 		i++;
 	}
+//	printf("\n%d %d", prm.y, prm.x);
 
 
 }
@@ -89,6 +89,7 @@ void prnt_plr (strct prm, int color)
 {
 		int y_init = prm.plrpos_y;
 		int x_init = prm.plrpos_x;
+//		printf("\n%d %d", prm.plrpos_y, prm.plrpos_x);
 
 
 
@@ -106,34 +107,34 @@ void prnt_plr (strct prm, int color)
 
 int key_handler(int keycode, strct *prm)
 {
-	printf("keycode = %d\n", keycode);
-	if (keycode == 13)
+//	printf("keycode = %d\n", keycode);
+	if (keycode == 126 || keycode == 13)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_y = prm->plrpos_y - SPEED;
-		prnt_plr(*prm, 0x435345);
+		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 1)
+	if (keycode == 1 || keycode == 125)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_y = prm->plrpos_y + SPEED;
-		prnt_plr(*prm, 0x435345);
+		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 0)
+	if (keycode == 0 || keycode == 123)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_x = prm->plrpos_x - SPEED;
-		prnt_plr(*prm, 0x435345);
+		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 2)
+	if (keycode == 2 || keycode == 124)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_x = prm->plrpos_x + SPEED;
-		prnt_plr(*prm, 0x435345);
+		prnt_plr(*prm, 0xDC143C);
 	}
 	if (keycode == 53)
 	{
