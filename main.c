@@ -102,7 +102,7 @@ void prnt_plr (strct prm, int color)
 			x_init = prm.plrpos_x;
 			y_init++;
 		}
-		print_ray(prm, 0xDC143C);
+		print_ray(prm, 0x574963);
 }
 
 int key_handler(int keycode, strct *prm)
@@ -179,26 +179,35 @@ void print_square(strct prm, int color)
 
 void print_ray(strct prm, int color)
 {
-	float ray_y = (float)prm.plrpos_y;
-	float ray_x = (float)prm.plrpos_x;
+	float ray_y = (float)prm.plrpos_y + SCALE/2;
+	float ray_x = (float)prm.plrpos_x + SCALE/2;
 	int raylen = 0;
 
 	float angle = prm.angle;
-	while (raylen < 1000)
+
+	while (angle < prm.angle + 1)
 	{
-//		while (angle < prm.angle + 1)
-//		{
-//
-//		}
-//
-		ray_y = ray_y + sin(prm.angle);
-		ray_x = ray_x + cos(prm.angle);
-		if (prm.map[(int)(ray_y / SCALE)][(int)(ray_x / SCALE)] != '1')
-			mlx_pixel_put(prm.mlx, prm.win, (int)ray_x, (int)ray_y, color);
-		else
-			break;
-		raylen++;
+		ray_y = (float)prm.plrpos_y + SCALE/2;
+		ray_x = (float)prm.plrpos_x + SCALE/2;
+
+		while (raylen < 1000)
+		{
+			ray_y = ray_y + sin(angle);
+			ray_x = ray_x + cos(angle);
+			if (prm.map[(int)(ray_y / SCALE)][(int)(ray_x / SCALE)] != '1')
+				mlx_pixel_put(prm.mlx, prm.win, (int)ray_x, (int)ray_y, color);
+			else
+				break;
+			raylen++;
+		}
+		raylen = 0;
+
+
+
+		angle = angle + 0.015;
 	}
+
+
 
 }
 
