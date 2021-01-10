@@ -17,6 +17,7 @@ int		main(int argc, char **argv)
 
 	prm.x = BORDER;
 	prm.y = BORDER;
+	prm.angle = 0;
 
 
 	fd = open(argv[1], O_RDONLY);
@@ -91,8 +92,6 @@ void prnt_plr (strct prm, int color)
 		int x_init = prm.plrpos_x;
 //		printf("\n%d %d", prm.plrpos_y, prm.plrpos_x);
 
-
-
 		while(y_init <= prm.plrpos_y + SCALE)
 		{
 			while (x_init <= prm.plrpos_x + SCALE)
@@ -103,39 +102,54 @@ void prnt_plr (strct prm, int color)
 			x_init = prm.plrpos_x;
 			y_init++;
 		}
+		print_ray(prm, 0xDC143C);
 }
 
 int key_handler(int keycode, strct *prm)
 {
 //	printf("keycode = %d\n", keycode);
-	if (keycode == 126 || keycode == 13)
+	if (keycode == 13)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_y = prm->plrpos_y - SPEED;
 		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 1 || keycode == 125)
+	if (keycode == 1)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_y = prm->plrpos_y + SPEED;
 		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 0 || keycode == 123)
+	if (keycode == 0)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_x = prm->plrpos_x - SPEED;
 		prnt_plr(*prm, 0xDC143C);
 	}
-	if (keycode == 2 || keycode == 124)
+	if (keycode == 2)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
 		print_map(*prm);
 		prm->plrpos_x = prm->plrpos_x + SPEED;
 		prnt_plr(*prm, 0xDC143C);
 	}
+	if (keycode == 124)
+	{
+		mlx_clear_window(prm->mlx, prm->win);
+		print_map(*prm);
+		prm->angle = prm->angle + 0.05;
+		prnt_plr(*prm, 0xDC143C);
+
+	}
+
+
+
+
+
+
 	if (keycode == 53)
 	{
 		mlx_destroy_window(prm->mlx, prm->win);
@@ -163,5 +177,28 @@ void print_square(strct prm, int color)
 	}
 }
 
+void print_ray(strct prm, int color)
+{
+	float ray_y = (float)prm.plrpos_y;
+	float ray_x = (float)prm.plrpos_x;
+	int raylen = 0;
 
+	float angle = prm.angle;
+	while (raylen < 1000)
+	{
+//		while (angle < prm.angle + 1)
+//		{
+//
+//		}
+//
+		ray_y = ray_y + sin(prm.angle);
+		ray_x = ray_x + cos(prm.angle);
+		if (prm.map[(int)(ray_y / SCALE)][(int)(ray_x / SCALE)] != '1')
+			mlx_pixel_put(prm.mlx, prm.win, (int)ray_x, (int)ray_y, color);
+		else
+			break;
+		raylen++;
+	}
+
+}
 

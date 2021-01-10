@@ -5,6 +5,7 @@
 #  define BUFFER_SIZE 42
 #include <unistd.h>
 #include <stdlib.h>
+#include <math.h>
 #define SCALE 20
 #define SPEED 7
 #define BORDER 0
@@ -22,6 +23,7 @@ typedef struct s_mlx
 	char	map[1024][1024];
 	int 	plrpos_x;
 	int		plrpos_y;
+	float 	angle;
 }	strct;
 
 
@@ -34,6 +36,7 @@ void 	print_map(strct prm);
 int key_handler(int keycode, strct *prm);
 void print_square(strct prm, int color);
 void prnt_plr (strct prm, int color);
+void print_ray(strct prm, int color);
 
 
 
