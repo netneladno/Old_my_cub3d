@@ -41,6 +41,11 @@ int		main(int argc, char **argv)
 
 	prm.mlx = mlx_init();
 	prm.win = mlx_new_window(prm.mlx, RESOLUT_X, RESOLUT_Y, "my_mlx");
+	prm.image.img = mlx_new_image(prm.mlx, RESOLUT_X, RESOLUT_Y);
+	prm.image.addr = mlx_get_data_addr(prm.image.img, &prm.image.bits_per_pixel, &prm.image.line_length,
+								 &prm.image.endian);
+	write_floor_sky(&prm);
+//	mlx_put_image_to_window(prm.mlx, prm.win, prm.image.img, 0, 0);
 	print_map(&prm);
 	prnt_plr(&prm, 0xDC143C);
 
@@ -91,7 +96,7 @@ void print_square_map(strct *prm, int color)
 	{
 		while (x_init <= prm->x + SCALE)
 		{
-			mlx_pixel_put(prm->mlx, prm->win, x_init, y_init, color);
+			my_mlx_pixel_put(&prm->image, x_init, y_init, color);
 			x_init++;
 		}
 		x_init = prm->x;
@@ -99,41 +104,48 @@ void print_square_map(strct *prm, int color)
 	}
 }
 
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char    *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 int key_handler(int keycode, strct *prm)
 {
 	if (keycode == 13)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx, prm->win, prm->image.img, 0, 0);
 		prm->plrpos_y = prm->plrpos_y - SPEED;
 		prnt_plr(prm, 0xDC143C);
 	}
 	if (keycode == 1)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx, prm->win, prm->image.img, 0, 0);
 		prm->plrpos_y = prm->plrpos_y + SPEED;
 		prnt_plr(prm, 0xDC143C);
 	}
 	if (keycode == 0)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx, prm->win, prm->image.img, 0, 0);
 		prm->plrpos_x = prm->plrpos_x - SPEED;
 		prnt_plr(prm,0xDC143C);
 	}
 	if (keycode == 2)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx, prm->win, prm->image.img, 0, 0);
 		prm->plrpos_x = prm->plrpos_x + SPEED;
 		prnt_plr(prm, 0xDC143C);
 	}
 	if (keycode == 124)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx,prm->win, prm->image.img, 0, 0);
 		prm->angle = prm->angle + 0.05;
 		prnt_plr(prm, 0xDC143C);
 
@@ -141,7 +153,7 @@ int key_handler(int keycode, strct *prm)
 	if (keycode == 123)
 	{
 		mlx_clear_window(prm->mlx, prm->win);
-		print_map(prm);
+		mlx_put_image_to_window(prm->mlx, prm->win, prm->image.img, 0, 0);
 		prm->angle = prm->angle - 0.05;
 		prnt_plr(prm, 0xDC143C);
 
@@ -208,6 +220,7 @@ void print_ray(strct *prm, int color)
 				break;
 			raylen++;
 		}
+//		printline(prm, i, 10*RESOLUT_Y/raylen, 0x759852);
 		prm->rays[i] = raylen;
 		i++;
 		angle = angle + 1 / (float)RESOLUT_X;
@@ -226,7 +239,7 @@ void print3d (strct *prm, int color)
 	while (x < (int)RESOLUT_X)
 	{
 
-		len = 10000/prm->rays[x];
+		len = 10*RESOLUT_Y/prm->rays[x];
 //		printf("x=%d, len=%d\n", x, len);
 		printline(prm, x, len, 0x759852);
 
@@ -252,3 +265,25 @@ void printline (strct *prm, int x, int len, int color)
 
 }
 
+void   write_floor_sky(strct *prm)
+{
+	int x;
+	int y = -1;
+
+	while (++y< RESOLUT_Y/2-1)
+	{
+		x = -1;
+		while(++x< RESOLUT_X-1)
+		{
+			my_mlx_pixel_put(&prm->image, x, y, 0x00BFFF);
+		}
+	}
+	while (++y<RESOLUT_Y)
+	{
+		x = -1;
+		while(++x< RESOLUT_X-1)
+		{
+			my_mlx_pixel_put(&prm->image, x, y, 0x654321 );
+		}
+	}
+}

@@ -6,12 +6,20 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#define SCALE 10
+#define SCALE 7
 #define SPEED 4
 #define BORDER 0
 #define RESOLUT_X 1000
 #define RESOLUT_Y 1000
 
+
+typedef struct  s_data {
+	void        *img;
+	char        *addr;
+	int         bits_per_pixel;
+	int         line_length;
+	int         endian;
+}               t_data;
 
 
 typedef struct s_mlx
@@ -24,7 +32,9 @@ typedef struct s_mlx
 	int 	plrpos_x;
 	int		plrpos_y;
 	float 	angle;
-	int		rays[RESOLUT_X];
+	float		rays[RESOLUT_X];
+	t_data	image;
+
 }	strct;
 
 
@@ -41,6 +51,8 @@ void print_ray(strct *prm, int color);
 void print_square(strct *prm, int y, int x, int width, int height, int color);
 void print3d (strct *prm, int color);
 void printline (strct *prm, int x, int len, int color);
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void   write_floor_sky(strct *prm);
 
 
 
