@@ -144,7 +144,14 @@ int key_handler(int keycode, strct *prm)
 		prnt_plr(*prm, 0xDC143C);
 
 	}
+	if (keycode == 123)
+	{
+		mlx_clear_window(prm->mlx, prm->win);
+		print_map(*prm);
+		prm->angle = prm->angle - 0.05;
+		prnt_plr(*prm, 0xDC143C);
 
+	}
 
 
 
@@ -179,11 +186,18 @@ void print_square(strct prm, int color)
 
 void print_ray(strct prm, int color)
 {
-	float ray_y = (float)prm.plrpos_y + SCALE/2;
-	float ray_x = (float)prm.plrpos_x + SCALE/2;
+	float ray_y;
+	float ray_x;
+	int i = 0;
 	int raylen = 0;
-
 	float angle = prm.angle;
+
+	while (i <= 100)
+	{
+		prm.rays[i] = 0;
+		i++;
+	}
+	i = 0;
 
 	while (angle < prm.angle + 1)
 	{
@@ -200,14 +214,15 @@ void print_ray(strct prm, int color)
 				break;
 			raylen++;
 		}
+		prm.rays[i] = raylen;
+		i++;
+
 		raylen = 0;
-
-
-
 		angle = angle + 0.015;
 	}
-
-
-
 }
 
+//void print3d (strct prm, int color)
+//{
+//
+//}

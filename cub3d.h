@@ -24,6 +24,7 @@ typedef struct s_mlx
 	int 	plrpos_x;
 	int		plrpos_y;
 	float 	angle;
+	int		rays[100];
 }	strct;
 
 
