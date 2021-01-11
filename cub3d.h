@@ -35,9 +35,11 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcpy(char *dest, char *src);
 void 	print_map(strct prm);
 int key_handler(int keycode, strct *prm);
-void print_square(strct prm, int color);
+void print_square_map(strct prm, int color);
 void prnt_plr (strct prm, int color);
-void print_ray(strct prm, int color);
+void print_ray(strct *prm, int color);
+void print_square(strct prm, int y, int x, int width, int height, int color);
+void print3d (strct prm, int color);
 
 
 

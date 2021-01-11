@@ -62,13 +62,13 @@ void print_map(strct prm)
 		{
 			if (prm.map[i][j] == '1')
 			{
-				print_square(prm, 0xffffff);
+				print_square_map(prm, 0xffffff);
 				prm.x = prm.x + SCALE;
 
 			}
 			else
 			{
-				print_square(prm, 0x222222);
+				print_square_map(prm, 0x222222);
 				prm.x = prm.x + SCALE;
 
 			}
@@ -86,24 +86,24 @@ void print_map(strct prm)
 
 }
 
-void prnt_plr (strct prm, int color)
+void print_square_map(strct prm, int color)
 {
-		int y_init = prm.plrpos_y;
-		int x_init = prm.plrpos_x;
-//		printf("\n%d %d", prm.plrpos_y, prm.plrpos_x);
+	int x_init = prm.x;
+	int y_init = prm.y;
 
-		while(y_init <= prm.plrpos_y + SCALE)
+
+	while(y_init <= prm.y + SCALE)
+	{
+		while (x_init <= prm.x + SCALE)
 		{
-			while (x_init <= prm.plrpos_x + SCALE)
-			{
-				mlx_pixel_put(prm.mlx, prm.win, x_init, y_init, color);
-				x_init++;
-			}
-			x_init = prm.plrpos_x;
-			y_init++;
+			mlx_pixel_put(prm.mlx, prm.win, x_init, y_init, color);
+			x_init++;
 		}
-		print_ray(prm, 0x574963);
+		x_init = prm.x;
+		y_init++;
+	}
 }
+
 
 int key_handler(int keycode, strct *prm)
 {
@@ -166,63 +166,122 @@ int key_handler(int keycode, strct *prm)
 	return (1);
 }
 
-void print_square(strct prm, int color)
+
+
+void prnt_plr (strct prm, int color)
 {
-	int x_init = prm.x;
-	int y_init = prm.y;
+		int y_init = prm.plrpos_y;
+		int x_init = prm.plrpos_x;
+//		printf("\n%d %d", prm.plrpos_y, prm.plrpos_x);
 
-
-	while(y_init <= prm.y + SCALE)
-	{
-		while (x_init <= prm.x + SCALE)
+		while(y_init <= prm.plrpos_y + SCALE)
 		{
-			mlx_pixel_put(prm.mlx, prm.win, x_init, y_init, color);
-			x_init++;
+			while (x_init <= prm.plrpos_x + SCALE)
+			{
+				mlx_pixel_put(prm.mlx, prm.win, x_init, y_init, color);
+				x_init++;
+			}
+			x_init = prm.plrpos_x;
+			y_init++;
 		}
-		x_init = prm.x;
-		y_init++;
-	}
+		print_ray(&prm, 0x574963);
+
+	int i = 0;
+
+//		print3d (prm, 0x574963);
 }
 
-void print_ray(strct prm, int color)
+
+void print_ray(strct *prm, int color)
 {
 	float ray_y;
 	float ray_x;
 	int i = 0;
 	int raylen = 0;
-	float angle = prm.angle;
+	float angle = prm->angle;
 
-	while (i <= 100)
+//	while (i <= 100)
+//	{
+//		prm.rays[i] = 0;
+//		i++;
+//	}
+//	i = 0;
+
+	while (angle < prm->angle + 1)
 	{
-		prm.rays[i] = 0;
-		i++;
-	}
-	i = 0;
+		ray_y = (float)prm->plrpos_y + SCALE/2;
+		ray_x = (float)prm->plrpos_x + SCALE/2;
 
-	while (angle < prm.angle + 1)
-	{
-		ray_y = (float)prm.plrpos_y + SCALE/2;
-		ray_x = (float)prm.plrpos_x + SCALE/2;
-
+		raylen = 0;
 		while (raylen < 1000)
 		{
 			ray_y = ray_y + sin(angle);
 			ray_x = ray_x + cos(angle);
-			if (prm.map[(int)(ray_y / SCALE)][(int)(ray_x / SCALE)] != '1')
-				mlx_pixel_put(prm.mlx, prm.win, (int)ray_x, (int)ray_y, color);
+			if (prm->map[(int)(ray_y / SCALE)][(int)(ray_x / SCALE)] != '1')
+				mlx_pixel_put(prm->mlx, prm->win, (int)ray_x, (int)ray_y, color);
 			else
 				break;
 			raylen++;
 		}
-		prm.rays[i] = raylen;
-		i++;
+		prm->rays[i] = raylen;
+//		print_square(prm, 550-((1/raylen)*1000), 3i, 3, (1/raylen)*1000, 0x862578);
 
-		raylen = 0;
+		//		print_square(prm, 550-(1/prm.rays[i]*100/2), 3i, 3, 1/prm.rays[i]*100, 0x862578);
+//		printf ("prm.rays[%d]=%d\n", i, prm.rays[i]);
+
+		i++;
+//		printf ("raylen=%d\n", raylen);
+
+
+
 		angle = angle + 0.015;
 	}
+
+//	i = 0;
+//	while (i <= 66)
+//	{
+//		printf ("prm->rays[%d]=%d\n", i,  prm->rays[i]);
+//		i++;
+//	}
 }
 
+
+
+//
 //void print3d (strct prm, int color)
 //{
+//	int i = 0;
+//	while (i <= 66)
+//	{
+//		i = 0;
+//		while (i <= 100)
+//		{
+//			printf ("%d\n", prm.rays[i]);
+//			i++;
+//		}
+////		printf ("prm.rays[%d]=%d\n", i, prm.rays[i]);
+////		print_square(prm, 550-(1/prm.rays[i]*100/2), 3i, 3, 1/prm.rays[i]*100, color);
+//		i++;
+//	}
+//
 //
 //}
+
+
+
+void print_square(strct prm, int y, int x, int width, int height, int color)
+{
+	int y_init = y;
+	int x_init = x;
+
+	while(y_init <= y + height)
+	{
+		while (x_init <= x + width)
+		{
+			mlx_pixel_put(prm.mlx, prm.win, x_init, y_init, color);
+			x_init++;
+		}
+		x_init = x;
+		y_init++;
+	}
+}
