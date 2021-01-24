@@ -129,6 +129,7 @@ cub3d: CMakeFiles/cub3d.dir/main.c.o
 cub3d: CMakeFiles/cub3d.dir/get_next_line.c.o
 cub3d: CMakeFiles/cub3d.dir/get_next_line_utils.c.o
 cub3d: CMakeFiles/cub3d.dir/build.make
+cub3d: /usr/local/lib/libmlx.a
 cub3d: CMakeFiles/cub3d.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jjacquel/School/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable cub3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cub3d.dir/link.txt --verbose=$(VERBOSE)
