@@ -6,11 +6,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#define SCALE 7
-#define SPEED 4
-#define BORDER 0
-#define RESOLUT_X 1000
-#define RESOLUT_Y 1000
+#define SCALE 120
+#define SPEED 40
+#define RESOLUT_X 2560
+#define RESOLUT_Y 1440
 
 
 typedef struct	s_data
@@ -54,6 +53,8 @@ void			print3d (strct *prm, int color);
 void			printline (strct *prm, int x, int len, int color);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			write_floor_sky(strct *prm);
+int drawing(strct *prm);
+
 
 
 
