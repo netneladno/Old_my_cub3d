@@ -6,8 +6,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#define SCALE 120
-#define SPEED 40
+#define SCALE 300
+#define SPEED 100
 #define RESOLUT_X 2560
 #define RESOLUT_Y 1440
 
@@ -34,6 +34,7 @@ typedef struct s_mlx
 	float 		angle;
 	float		rays[RESOLUT_X];
 	t_data		img;
+	int			ray_side[RESOLUT_X]
 
 }	strct;
 
